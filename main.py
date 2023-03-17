@@ -9,6 +9,8 @@ from zipfile import ZipFile
 from rapidkey import get_key
 import requests
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 url = "https://binance43.p.rapidapi.com/ticker/24hr"
 
 querystring = {"symbol": "ETHUSDT"}
@@ -61,17 +63,17 @@ def get_file(year, month_one, month_two):
     :return: None
     """
     url = f'https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-{year}-{month_one}.zip'
-    urlretrieve(url, '/home/admin1/PycharmProjects/pythonProject1/1.zip')
+    urlretrieve(url, f'{BASE_DIR}/1.zip')
     with ZipFile('1.zip', 'r') as zip_file:
-        zip_file.extractall('/home/admin1/PycharmProjects/pythonProject1/file')
+        zip_file.extractall(f'{BASE_DIR}/file')
 
     url = f'https://data.binance.vision/data/spot/monthly/klines/ETHUSDT/1h/ETHUSDT-1h-{year}-{month_two}.zip'
-    urlretrieve(url, '/home/admin1/PycharmProjects/pythonProject1/2.zip')
+    urlretrieve(url, f'{BASE_DIR}/2.zip')
     with ZipFile('2.zip', 'r') as zip_file:
-        zip_file.extractall('/home/admin1/PycharmProjects/pythonProject1/file')
+        zip_file.extractall(f'{BASE_DIR}/file')
 
-    os.remove('/home/admin1/PycharmProjects/pythonProject1/1.zip')
-    os.remove('/home/admin1/PycharmProjects/pythonProject1/2.zip')
+    os.remove(f'{BASE_DIR}/1.zip')
+    os.remove(f'{BASE_DIR}/2.zip')
 
 
 def get_all_price():
